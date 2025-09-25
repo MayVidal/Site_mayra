@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Energiza! Solar e eólica</title>
+  <!--CSS Bootstrap-->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <!--CSs Personalizado-->
+  <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+  <link rel="stylesheet" type="text/css" href="css/arquivodoido.css" />
+  <!--Fonte para icones- Biblioteca-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+    integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
+</head>
+
+<body onload="loadCitiesAndStates()"><!--Aqui tem o onload para carregar dados da api-->
+
+  <!--Topo-->
+  <div class="container-fluid bg-topo">
+    <!--Classe bg-topo é particular e está no estilo.css-->
+    <header class="container">
+      <!--Menu de navegação-->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="index.html" class="navbar-brand">
+          <img src="img/logo.png" height="140" class="d-inline-block align-top" />
+        </a>
+        <!--btn para caso mobile-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" area-controls="menu"
+          aria-expanded="false" aria-label="Menu Colapso">
+          <!--Icone para Menu no caso mobile-->
+          <span class="navbar-toggler-icon text-light"></span>
+        </button>
+        <!--Área de conteúdo-->
+        <div id="menu" class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto text-light">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link text-light font-weight-bold">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="#somos" class="nav-link text-light font-weight-bold">Quem somos</a>
+            </li>
+            <li class="nav-item">
+              <a href="#servicos" class="nav-link text-light font-weight-bold">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a href="formulario.html" class="nav-link text-light font-weight-bold">Contato</a>
+            </li>
+          </ul>
+          <!--Botao de orçamento  id="open-modal-btn" -->
+          <!--<a href="#" class="btn col-md-3 btn-orcamento">Pedir Orçamento</a>   data-target="#modal"  -->
+          <button class="btn col-md-3 btn-orcamento"><a href="formulario.html">Pedir Orçamento</a></button>
+
+          <!-- Formulário modal -->
+          <div>
+
+            <!-- Fim Formulario-->
+          </div>
+        </div>
+
+  </div>
+  </div>
+  </div>
+  </nav>
+  </header>
+  </div>
+  <!--Fim estilização TOPO-->
+  <!--Inicio SlideShow-->
+  <div class="container-fluid my-2">
+    <div id="slideshow" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#slideshow" data-slide-to="0" class="active"></li>
+        <li data-target="#slideshow" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <a href="#">
+            <img src="img/bannerPainelSolar.png" class="d-block w-100" alt="Foto painel Solar" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="#">
+            <img src="img/banner123.png" class="d-block w-100" alt="Foto energia eólica" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="#">
+            <img src="img/123.png" class="d-block w-100" alt="Foto energia eólica" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="#">
+            <img src="img/1234Mulher.png" class="d-block w-100" alt="Foto energia eólica" />
+          </a>
+        </div>
+      </div>
+      <!--Botoes voltar/next no banner-->
+      <a href="#slideshow" class="carousel-control-prev" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+      </a>
+      <a href="#slideshow" class="carousel-control-next" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Próximo</span>
+      </a>
+    </div>
+  </div>
+
+  <!--Fim SlideShow-->
+  <!--<div class="modal-content">-->
+  <div class="container-fluid">
+    <div class="formbold-main-wrapper">
+      <!-- Author: FormBold Team -->
+      <!-- Learn More: https://formbold.com -->
+      <div class="formbold-form-wrapper">
+
+       <form id="meuFormulario">
+
+  <label><strong>Nome Completo</strong></label>
+  <input type="text" name="nome" placeholder="Informe seu nome completo" required class="input-wide" /><br>
+
+  <label><strong>CPF</strong></label>
+  <input type="text" name="cpf" maxlength="14" /><br>
+
+  <label><strong>Data de Nascimento</strong></label>
+  <input type="text" name="nascimento" placeholder="DD/MM/AAAA" required class="input-wide" /><br>
+
+  <label><strong>Email</strong></label>
+  <input type="email" name="email" placeholder="teste@gmail.com" required class="input-wide" /><br>
+
+  <label><strong>Telefone</strong></label>
+  <input type="text" name="telefone" placeholder="(00)0000-0000" /><br>
+
+  <label><strong>Endereço</strong></label>
+  <input type="text" name="endereco" placeholder="Informe seu endereço" required class="input-wide" /><br>
+
+  <label><strong>Curso</strong></label>
+  <select name="curso" required>
+    <option value="">-- Nenhum --</option>  
+    <option value="Inglês Básico">Inglês Básico</option>
+    <option value="Espanhol Básico">Espanhol Básico</option>
+    <option value="Informática Básica">Informática Básica</option>
+  </select><br>
+
+  <label><strong>Escolaridade</strong></label>
+  <select name="escolaridade" required>
+    <option value="">-- Nenhum --</option>
+    <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+    <option value="Fundamental Completo">Fundamental Completo</option>
+    <option value="Médio Incompleto">Médio Incompleto</option>
+    <option value="Médio Completo">Médio Completo</option>
+    <option value="Superior Incompleto">Superior Incompleto</option>
+    <option value="Superior Completo">Superior Completo</option>
+  </select><br>
+
+  <label><strong>Renda Familiar</strong></label>
+  <select name="renda" required>
+    <option value="">-- Nenhum --</option>
+    <option value="Até 1 salário mínimo">Até 1 salário mínimo</option>
+    <option value="De 1 a 2 salários mínimos">De 1 a 2 salários mínimos</option>
+    <option value="De 2 a 3 salários mínimos">De 2 a 3 salários mínimos</option>
+    <option value="De 3 a 5 salários mínimos">De 3 a 5 salários mínimos</option>
+    <option value="Mais de 5 salários mínimos">Mais de 5 salários mínimos</option>
+  </select><br>
+
+  <label><strong>Como você ficou sabendo dos nossos cursos?</strong></label>
+  <select name="origem">
+    <option value="">-- Nenhum --</option>
+    <option value="Site">Site</option>
+    <option value="Redes Sociais">Redes Sociais</option>
+    <option value="Indicação">Indicação</option>
+    <option value="Lista Adquirida">Lista Adquirida</option>
+    <option value="Outro">Outro</option>
+  </select><br>
+
+  <button type="submit"><strong>Enviar</strong></button>
+</form>
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwDnwLXnPh3HjYG_yx32LbxZj6SQZJKhaTvKHwzamuvbTLk0kv0PfRzRkJeDVKfxKI/exec"; // 🔗 Sua URL do WebApp
+  const form = document.getElementById("meuFormulario");
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+      alert("Enviado com sucesso!");
+      form.reset();
+    })
+    .catch(err => alert("Erro ao enviar: " + err));
+  });
+</script>
+
+          
+
+
+
+        <!--Fim Form -->
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  </div>
+
+
+  <!--Rodapé-->
+  <footer class="container-fluid bg-rodape1">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="text-light align-middle mais-info"><i class="fas fa-info-circle fa-2x mr-2 text-light"></i>
+          Informações úteis</h5>
+        <ul class="text-light">
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i></i>Trabalhe conosco</a></li>
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Telefones úteis</a></li>
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Suporte técnico</a></li>
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Administrativo</a></li>
+
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-6">
+          <h6 class="text-light mais-empresa">Mais sobre a empresa<span class="underline-footer" </h6>
+              <ul class="text-light">
+                <li><a href="#somos" class="text-light">Quem Somos</a></li>
+                <li><a href="#parceiros" class="text-light">Parceiros</a></li>
+                <li><a href="#servicos" class="text-light">Portifolio</a></li>
+                <li><a href="formulario.html" class="text-light">Contato</a></li>
+
+              </ul>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-light mb3 bg-card-rodape">
+          <div class="card-body">
+            <h4 class="card-title"><i class="far fa-building mr2 fa-2x icon-banner-rodape"></i>
+              Traga sua empresa</h4>
+            <p class="card-text text-justify">Peça um orçamento sem compromisso e veja como podemos ajudar na economia
+              de energia</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  <div class="container-fluid bg-rodape2">
+    <div class="continer py-4">
+      <img src="img/logoRodape.png" class="img-fluid mx-auto d-block">
+      <div class="text-center pt-1">
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-facebook-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-youtube-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-instagram-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-twitter-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-linkedin-square fa-lg"></i></a>
+      </div></img>
+    </div>
+
+  </div>
+  <!--Fim do Rodapé-->
+
+  <!--JS Bootstrap-->
+  <script type="text/javascript" src="js/jquery-min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+  <script type="text/javascript" src="js/waypoints.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script>
+    // Popula a lista de estados com base na região selecionada
+    function populateStates(regionId) {
+      // URL da API do IBGE para listar os estados da região selecionada
+      const url = `https://servicodados.ibge.gov.br/api/v1/localidades/regioes/${regionId}/estados`;
+
+      // Limpa a lista de estados antes de adicioná-los
+      const stateSelect = document.getElementById('state');
+      stateSelect.innerHTML = '<option value="">Select a state</option>';
+
+      // Faz uma requisição AJAX para a API do IBGE
+      fetch(url)
+        .then(response => response.json())
+        .then(states => {
+          // Adiciona cada estado retornado pela API à lista de estados
+          states.forEach(state => {
+            const option = document.createElement('option');
+            option.value = state.id;
+            option.text = state.nome;
+            stateSelect.add(option);
+          });
+        });
+    }
+
+    // Popula a lista de cidades com base no estado selecionado
+    function populateCities(stateId) {
+      // URL da API do IBGE para listar as cidades do estado selecionado
+      const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios`;
+
+      // Limpa a lista de cidades antes de adicioná-las
+      const citySelect = document.getElementById('city');
+      citySelect.innerHTML = '<option value="">Select a city</option>';
+
+      // Faz uma requisição AJAX para a API do IBGE
+      fetch(url)
+        .then(response => response.json())
+        .then(cities => {
+          // Adiciona cada cidade retornado pela API à lista de cidades
+          cities.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city.nome;
+            option.text = city.nome;
+            citySelect.add(option);
+          });
+        });
+    }
+
+    // Seleciona o elemento de região e adiciona um ouvinte de evento para preencher a lista de estados
+    const regionSelect = document.getElementById('region');
+    regionSelect.addEventListener('change', () => {
+      const regionId = regionSelect.value;
+      populateStates(regionId);
+    });
+
+    // Seleciona o elemento de estado e adiciona um ouvinte de evento para preencher a lista de cidades
+    const stateSelect = document.getElementById('state');
+    stateSelect.addEventListener('change', () => {
+      const stateId = stateSelect.value;
+      populateCities(stateId);
+    });
+
+  </script>
+</body>
+
+</html>

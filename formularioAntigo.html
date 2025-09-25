@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Energiza! Solar e eólica</title>
+  <!--CSS Bootstrap-->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <!--CSs Personalizado-->
+  <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+  <link rel="stylesheet" type="text/css" href="css/arquivodoido.css" />
+  <!--Fonte para icones- Biblioteca-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+    integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
+</head>
+
+<body onload="loadCitiesAndStates()"><!--Aqui tem o onload para carregar dados da api-->
+
+  <!--Topo-->
+  <div class="container-fluid bg-topo">
+    <!--Classe bg-topo é particular e está no estilo.css-->
+    <header class="container">
+      <!--Menu de navegação-->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="#" class="navbar-brand">
+          <img src="img/logo.png" height="140" class="d-inline-block align-top" />
+        </a>
+        <!--btn para caso mobile-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" area-controls="menu"
+          aria-expanded="false" aria-label="Menu Colapso">
+          <!--Icone para Menu no caso mobile-->
+          <span class="navbar-toggler-icon text-light"></span>
+        </button>
+        <!--Área de conteúdo-->
+        <div id="menu" class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto text-light">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-light font-weight-bold">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="#somos" class="nav-link text-light font-weight-bold">Quem somos</a>
+            </li>
+            <li class="nav-item">
+              <a href="#servicos" class="nav-link text-light font-weight-bold">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-light font-weight-bold">Contato</a>
+            </li>
+          </ul>
+          <!--Botao de orçamento  id="open-modal-btn" -->
+          <!--<a href="#" class="btn col-md-3 btn-orcamento">Pedir Orçamento</a>   data-target="#modal"  -->
+          <button  class="btn col-md-3 btn-orcamento"><a href="formulario.html">Pedir Orçamento</a></button>
+
+          <!-- Formulário modal -->
+          <div>
+
+            <!-- Fim Formulario-->
+          </div>
+        </div>
+
+  </div>
+  </div>
+  </div>
+  </nav>
+  </header>
+  </div>
+  <!--Fim estilização TOPO-->
+  <!--Inicio SlideShow-->
+  <div class="container-fluid my-2">
+    <div id="slideshow" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#slideshow" data-slide-to="0" class="active"></li>
+        <li data-target="#slideshow" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <a href="#">
+            <img src="img/bannerPainelSolar.png" class="d-block w-100" alt="Foto painel Solar" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="#">
+            <img src="img/banner123.png" class="d-block w-100" alt="Foto energia eólica" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="#">
+            <img src="img/123.png" class="d-block w-100" alt="Foto energia eólica" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="#">
+            <img src="img/1234Mulher.png" class="d-block w-100" alt="Foto energia eólica" />
+          </a>
+        </div>
+      </div>
+      <!--Botoes voltar/next no banner-->
+      <a href="#slideshow" class="carousel-control-prev" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+      </a>
+      <a href="#slideshow" class="carousel-control-next" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Próximo</span>
+      </a>
+    </div>
+  </div>
+
+  <!--Fim SlideShow-->
+  <!--<div class="modal-content">-->
+  <div class="container-fluid">
+    <div class="formbold-main-wrapper">
+      <!-- Author: FormBold Team -->
+      <!-- Learn More: https://formbold.com -->
+      <div class="formbold-form-wrapper">
+        <!--Form Sabado 06/05/23-->
+        <h2 class="formTitulo">Formulário de Contato</h2>
+        <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+          <!--Pagina de retorno vai aqui-->
+          <input type=hidden name="oid" value="00DDo000001DPsW">
+          <input type=hidden name="retURL" value="https://www.linkedin.com/in/c-jesus/">
+
+          <label for="first_name"><strong>Primeiro nome*</strong></label>
+          <input id="first_name" maxlength="40" name="first_name" size="20" type="text"
+            placeholder="Coloque seu primeiro nome" required class="input-wide" />
+
+
+          <label for="last_name"><strong>Sobrenome*</strong></label>
+          <input id="last_name" maxlength="80" name="last_name" size="20" type="text"
+            placeholder="Coloque seu sobrenome" required class="input-wide" />
+
+          <label for="company"><strong>Empresa*</strong></label>
+          <input id="company" maxlength="40" name="company" size="20" type="text" placeholder="Nome da empresa" required
+            class="input-wide" /><br>
+
+          <label><strong>Tipo de Energia</strong></label>
+          <select id="00NDo000003jpdb" name="00NDo000003jpdb" title="Tipo de energia solicitada">
+            <option value="">-- Nenhum --</option>
+            <option value="Energia Solar">Energia Solar</option>
+            <option value="Energia Eólica">Energia Eólica</option>
+          </select>
+
+          <label for="cep"><strong>CEP:*</strong></label>
+          <input id="00NDo000003kDtZ" maxlength="8" name="00NDo000003kDtZ" size="20" type="text"
+            placeholder="Digite seu CEP" required />
+
+          <label for="phone"><strong>Telefone</strong></label>
+          <input id="phone" maxlength="40" name="phone" size="20" type="text" placeholder="(xx)xxxx-xxxx"
+            class="input-wide" />
+
+          <label for="email"><strong>Email*</strong></label>
+          <input id="email" maxlength="80" name="email" size="20" type="text" placeholder="Seu email" required
+            class="input-wide" />
+
+          <label for="cpf"><strong>Seu CPF*</strong></label>
+          <input id="00NDo000003jpe5" maxlength="14" name="00NDo000003jpe5" size="20" type="text"
+            placeholder="Coloque o CPF" required class="input-wide" />
+
+          <label for="cnpj"><strong>CNPJ*</strong></label>
+          <input type="text" id="cnpj" name="cnpj" placeholder="Coloque o CNPJ da empresa" required class="input-wide">
+          <!--Analisar esses dados -->
+
+          <input type="hidden" id="member_status" name="member_status" value="" /><br>
+
+          <label for="Campaign_ID">Campanha</label>
+          <select id="Campaign_ID" name="Campaign_ID">
+            <option value="">-- Nenhum --</option>
+            <option value="701Do000000Mn6E">GC Product Webinar - Jan 7, 2002</option>
+            <option value="701Do000000Mn6F">User Conference - Jun 17-19, 2002</option>
+            <option value="701Do000000Mn6G">DM Campaign to Top Customers - Nov 12-23, 2001</option>
+            <option value="701Do000000Mn6H">International Electrical Engineers Association Trade Show - Mar 4-5, 2002
+            </option>
+          </select><br>
+          <!--Analisar esses dados -->
+
+
+
+
+
+
+          <label for="region"><strong>Região*</strong></label>
+          <select id="region" name="region" required>
+            <option value="">Selecione sua região</option>
+            <option value="1">Norte</option>
+            <option value="2">Nordeste</option>
+            <option value="3">Sudeste</option>
+            <option value="4">Sul</option>
+            <option value="5">Centro-Oeste</option>
+          </select>
+
+          <label for="state"><strong>Estado*</strong></label>
+          <select id="state" name="state" required>
+            <option value="">Selecione o estado</option>
+            <!-- Usado o JavaScript para preencher os dados com a IBGE API -->
+          </select>
+
+          <label for="city"><strong>Cidade*</strong></label>
+          <select id="city" name="city" required>
+            <option value="">Selecione a cidade</option>
+            <!-- Use JavaScript to populate the options with the list of cities from the IBGE API -->
+          </select>
+
+          <button type="submit" input type="submit" name="submit"><strong>Enviar</strong>
+
+          </button>
+          <!--<input type="submit" name="submit">-->
+        </form>
+
+        <!--Fim Form Sabado 06/05/23-->
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  </div>
+  <!--Inicio Seção 1Paralax-->
+  <div id="somos" class="container-fluid bg-parallax">
+    <div class="py-4">
+      <section class="container">
+        <header class="col-md-12">
+          <h2 class="text-center text-light">
+            Quem somos?
+            <span class="underline"></span>
+          </h2>
+          <p class="text-center text-light">
+            A Energiza! trabalha para garantir a susstentabilidade junto a elaboração dos planos de crescimento de sua
+            empresa.Soluções Sustentáveis, uma empresa genuinamente piauiense, nasceu com a ideia de trazer
+            competitividade ao mercado de energia fotovoltaica no Brasil, buscando sempre alinhar os melhores produtos e
+            um serviço de excelência para entregar o nosso melhor.
+
+
+          </p>
+        </header>
+        <div class="row py-2">
+          <div class="col-sm-6 ccol-md-3 col-lg-3">
+            <div class="fatos">
+              <div class="icon">
+                <i class="fa fa-clock"></i>
+              </div>
+              <div class="fatos-contador">
+                <h3>+<span class="contar">43678</span></h3>
+                <h4>Usuários conectados</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 ccol-md-3 col-lg-3">
+            <div class="fatos">
+              <div class="icon">
+                <i class="fa fa-book"></i>
+              </div>
+              <div class="fatos-contador">
+                <h3><span class="contar">160</span></h3>
+                <h4>Instalações mensais</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 ccol-md-3 col-lg-3">
+            <div class="fatos">
+              <div class="icon">
+                <i class="fa fa-users"></i>
+              </div>
+              <div class="fatos-contador">
+                <h3>+<span class="contar">2897</span></h3>
+                <h4>Cidades do nordeste</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 ccol-md-3 col-lg-3">
+            <div class="fatos">
+              <div class="icon">
+                <i class="fa fa-star"></i>
+              </div>
+              <div class="fatos-contador">
+                <h3><span class="contar">4.8</span></h3>
+                <h4>Avaliação dos clientes</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!--Rodapé-->
+  <footer class="container-fluid bg-rodape1">
+    <div class="row">
+      <div class="col-md-4">
+        <h5 class="text-light align-middle mais-info"><i class="fas fa-info-circle fa-2x mr-2 text-light"></i>
+          Informações úteis</h5>
+        <ul class="text-light">
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i></i>Trabalhe conosco</a></li>
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Telefones úteis</a></li>
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Suporte técnico</a></li>
+          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Administrativo</a></li>
+
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-6">
+          <h6 class="text-light mais-empresa">Mais sobre a empresa<span class="underline-footer" </h6>
+              <ul class="text-light">
+                <li><a href="#" class="text-light">Quem Somos</a></li>
+                <li><a href="#" class="text-light">Parceiros</a></li>
+                <li><a href="#" class="text-light">Portifolio</a></li>
+                <li><a href="#" class="text-light">Contato</a></li>
+
+              </ul>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-light mb3 bg-card-rodape">
+          <div class="card-body">
+            <h4 class="card-title"><i class="far fa-building mr2 fa-2x icon-banner-rodape"></i>
+              Traga sua empresa</h4>
+            <p class="card-text text-justify">Peça um orçamento sem compromisso e veja como podemos ajudar na economia
+              de energia</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  <div class="container-fluid bg-rodape2">
+    <div class="continer py-4">
+      <img src="img/logoRodape.png" class="img-fluid mx-auto d-block">
+      <div class="text-center pt-1">
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-facebook-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-youtube-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-instagram-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-twitter-square fa-lg"></i></a>
+        <a href="#" class="icon-social" target="_blank"><i class="fab fa-linkedin-square fa-lg"></i></a>
+      </div></img>
+    </div>
+
+  </div>
+  <!--Fim do Rodapé-->
+
+  <!--JS Bootstrap-->
+  <script type="text/javascript" src="js/jquery-min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+  <script type="text/javascript" src="js/waypoints.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script>
+    // Popula a lista de estados com base na região selecionada
+    function populateStates(regionId) {
+      // URL da API do IBGE para listar os estados da região selecionada
+      const url = `https://servicodados.ibge.gov.br/api/v1/localidades/regioes/${regionId}/estados`;
+
+      // Limpa a lista de estados antes de adicioná-los
+      const stateSelect = document.getElementById('state');
+      stateSelect.innerHTML = '<option value="">Select a state</option>';
+
+      // Faz uma requisição AJAX para a API do IBGE
+      fetch(url)
+        .then(response => response.json())
+        .then(states => {
+          // Adiciona cada estado retornado pela API à lista de estados
+          states.forEach(state => {
+            const option = document.createElement('option');
+            option.value = state.id;
+            option.text = state.nome;
+            stateSelect.add(option);
+          });
+        });
+    }
+
+    // Popula a lista de cidades com base no estado selecionado
+    function populateCities(stateId) {
+      // URL da API do IBGE para listar as cidades do estado selecionado
+      const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios`;
+
+      // Limpa a lista de cidades antes de adicioná-las
+      const citySelect = document.getElementById('city');
+      citySelect.innerHTML = '<option value="">Select a city</option>';
+
+      // Faz uma requisição AJAX para a API do IBGE
+      fetch(url)
+        .then(response => response.json())
+        .then(cities => {
+          // Adiciona cada cidade retornado pela API à lista de cidades
+          cities.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city.nome;
+            option.text = city.nome;
+            citySelect.add(option);
+          });
+        });
+    }
+
+    // Seleciona o elemento de região e adiciona um ouvinte de evento para preencher a lista de estados
+    const regionSelect = document.getElementById('region');
+    regionSelect.addEventListener('change', () => {
+      const regionId = regionSelect.value;
+      populateStates(regionId);
+    });
+
+    // Seleciona o elemento de estado e adiciona um ouvinte de evento para preencher a lista de cidades
+    const stateSelect = document.getElementById('state');
+    stateSelect.addEventListener('change', () => {
+      const stateId = stateSelect.value;
+      populateCities(stateId);
+    });
+
+  </script>
+</body>
+
+</html>

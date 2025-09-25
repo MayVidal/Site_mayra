@@ -1,0 +1,383 @@
+/* Configurações do topo*/
+
+.bg-topo{
+    background-color: #05396d;
+}
+
+
+.btn-orcamento{
+    border: 2px solid #fff;
+    background: none;
+    position: relative;
+    color: #fff;
+    z-index: 1;
+    border-radius: 30px;
+    height: 100%;
+    
+    
+}
+.btn-orcamento:hover{
+    color:#68627a;
+    background: #fff;
+    border-color: #fff;
+    transition: all .50s ease-in-out;
+    -moz-transition: all .50s ease-in-out;
+    -webkit-transition: all .50s ease-in-out;
+
+}
+
+/*Seção de serviços*/
+.bg-servicos{
+    background: linear-gradient(131.26deg,#05396d,#dee7f0 100%);
+}
+/*Bg parceiros*/
+.bg-parceiros{
+    background-color: #c8d5e0;
+    background: linear-gradient(131.26deg,#05396d,#6483a3 ,#05396d 100%);
+}
+.padding-parceiros{
+    padding: 2px !important;
+}
+.servicos-container {
+    background-color: transparent;
+    margin: 0 auto;
+    max-width: 4800px;
+  }
+  
+  .bg-servicos {
+    background: linear-gradient(131.26deg, #2974c0 30%, #1BAF51 100%);
+  }
+  
+  .py-4 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .text-light {
+    color: #fff !important;
+  }
+  
+  .rounded {
+    border-radius: 0.5rem !important;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 0.5rem 1rem rgba(1, 1, 1, 0.15) !important;
+  }
+  /*Paralax*/
+  /*.bg-parallax{
+    background: url(../img/bkg1.png) fixed;
+    background-repeat: no-repeat;  Nao repete no fundo 
+    position: relative;
+    
+  }*/
+  .bg-parallax {
+    background: url(../img/bkg1.png) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; /* Adiciona esta linha */
+    position: relative;
+  }
+  
+
+  .fatos{
+    text-align: center;
+    color: #fff;
+  }
+  .fatos .icon i{
+    font-size:50px;
+    color: #fff;
+  }
+  .fatos h3{
+    font-size:35px;
+    color: #fff;
+    margin-bottom: 5px;
+    font-weight:700;
+    letter-spacing: 1px;
+  }
+  .fatos h4{
+    font-size:20px;
+    color: #fff;
+    font-weight:400;
+    letter-spacing: 1px;
+  }
+
+  
+  
+  
+  
+  /*Fim Paralax*/
+  /*Configuracoes  preco produtos especificos*/
+  .tabela-preco{
+    padding: 0 0 40px 0;
+    margin:0 auto;
+    margin-bottom: 5px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #f1f1f1;
+
+  }
+  .tabela-preco .preco-detalhe h2{
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    background-color: #f1f1f1;
+    padding: 30px 0;
+   
+  }
+  
+  .tabela-preco .preco-detalhe span{
+    display: block;
+    font-size: 48px;
+    font-weight: 400px;
+    color: #68627a;
+    margin-bottom: 45px;
+  }
+  .tabela-preco .preco-detalhe ul{
+    margin-bottom: 35px;
+    padding: 0 !important;
+  }
+  .tabela-preco .preco-detalhe ul li {
+    padding: 10px;
+    font-size: 15px;
+    border-bottom: 1px dotted #f1f1f1;
+    list-style: none;
+  }
+  .btn-preco{
+    border: 1px solid #ff3859;
+    background-color: #ff3859;
+    position: relative;
+    color: #fff;
+    z-index: 1;
+    border-radius: 30px;
+  }
+  .btn-preco:hover{
+    color:#fff;
+    background: #4c465f;
+    transition: all 0.50s ease-in-out;
+    -moz-transition: all 0.50s ease-in-out;
+    -webkit-transition:all 0.50s ease-in-out;
+
+  }
+  /*Rodapé*/
+  .bg-rodape1{
+    background-color: #0b4279;
+  }
+  .bg-rodape1 ul{
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+  }
+  .bg-rodape1 ul li{
+    list-style: none;
+  }
+  .bg-card-rodape{
+    margin-top: 38px;
+    margin-bottom: 8px;
+    background-color:#ff3859 ;
+  }
+  .mais-empresa{
+    margin-top: 38px;
+  }
+  .mais-info{
+    margin-top: 38px;
+  }
+  .icon-banner-rodape{
+    color:#c42841;
+  }
+  .bg-rodape2{
+    background-color: #0b4279;
+  }
+  a.icone-social{
+    color:#31aeec;
+  }
+  
+
+/*Configuracoes gerais*/
+.underline{
+    content:'';
+    border-top: 2px solid #1BAF51;
+    width: 70px;
+    display: block;
+    margin-bottom: 8px;
+    margin: 0 auto;
+}
+.underline-footer{
+    content:'';
+    border-top: 2px solid #1BAF51;
+    width: 70px;
+    display: block;
+    margin-top: 5px;
+   
+}
+.row img {
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .sombra:hover{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7)
+  }
+  /*Botao orçamento Modal*/
+ /*Estilo para o fundo esmaecido*/
+/* defaults */
+/* =============================================== */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  --light: hsl(0, 0%, 100%);
+  --background: linear-gradient(to right bottom, hsl(236, 50%, 50%), hsl(195, 50%, 50%));
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', sans-serif;
+
+  min-height: 100vh;
+  background: linear-gradient(to bottom, hsl(236, 50%, 98%), hsl(236, 50%, 94%));
+}
+
+a,
+a:link {
+  font-family: inherit;
+  text-decoration: none;
+}
+
+
+  /* Estilos do botão */
+  .btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+   
+  }
+  
+  /*04/05/23 aDICIONADO POSIÇÃO DO BTN image.png*/
+  .row.py-4.d-flex.justify-content-center.align-items-center.flex-wrap {
+    position: relative;
+    }
+    
+    .modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(33, 36, 79, 0.5); /* cor do fundo do modal */
+    }
+    /*--------------------Padronizando o tamanho do Form----------------------*/
+    .formTitulo{
+      text-align: center;
+      text-decoration: underline;
+      padding-top: 13px;
+    }
+
+    form {
+      padding: 2px;
+      height: 500px; /* exemplo de altura para o formulário */
+      padding: 23px;
+    }
+    input {
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box; /* para incluir o padding e border na altura do elemento */
+    }
+    .input-wide {
+      width: 100%;
+    }
+    
+    
+    label, input, select, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    /*Radio Tipo de energia*/
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    /*----CEP---*/
+    #cep {
+      width: 100%;
+    }
+        
+    
+    input[type="text"], input[type="email"], input[type="tel"], select {
+      height: 30px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 6 5-6' stroke='%23333' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 5px center/10px;
+    }
+    
+    button[type="submit"] {
+      height: 40px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+    
+    @media (min-width: 768px) {
+      label, input, select, button {
+        width: 48%;
+        margin-right: 4%;
+        margin-bottom: 10px;
+        float: left;
+      }
+    
+      label:nth-child(2n+1) {
+        clear: both;
+      }
+    
+      select, button {
+        width: 100%;
+      }
+    }
+    
+     /*Estilizando titulo no rodape*/
+
+     button:hover {
+      background-color: #FFA87D;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+    
+      
+      
+      
+            
+      
+      
