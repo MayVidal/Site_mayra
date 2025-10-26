@@ -1,532 +1,338 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Matrícula - ONG Moradia e Cidadania</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+body { font-family: 'Poppins', sans-serif; margin:0; background:#f9f9f9; color:#333; }
+header { text-align:center; padding:40px 20px; background: rgba(44,62,80,0.85); color:#fff; display:flex; flex-direction:column; align-items:center; }
+h1 { margin:0; font-size:28px; }
+h2 { margin-top:10px; font-weight: normal; font-size:18px; }
+.container { max-width:900px; margin:30px auto; padding:20px; }
+.card { background: rgba(255,255,255,0.95); padding:25px; margin-bottom:20px; border-radius:16px; box-shadow:0 6px 12px rgba(0,0,0,0.1);}
+h3 { display:flex; align-items:center; gap:8px; color:#2c3e50; }
+button { background:#6fcf97; color:#fff; border:none; padding:14px 24px; font-size:16px; border-radius:10px; cursor:pointer; transition:0.3s; display:flex; align-items:center; gap:8px; justify-content:center;}
+button:hover { background:#4caf70; }
+.course-btn { width:100%; justify-content:flex-start; padding:12px; font-size:16px; margin:6px 0; background:#a8e6cf; color:#2c3e50; }
+.course-btn:hover { background:#8bd6b5; }
+form { display:flex; flex-direction:column; gap:18px; }
+input, select, textarea { padding:12px; border:1px solid #ccc; border-radius:8px; font-size:14px; width:100%; }
+label { font-weight:600; margin-bottom:5px; display:flex; align-items:center; gap:6px; }
+.hidden { display:none; color:#e74c3c; font-size:13px; }
+.icon-red { stroke:#e74c3c; stroke-width:2px; }
+.icon-green { stroke:#27ae60; stroke-width:2px; }
+.icon-blue { stroke:#3498db; stroke-width:2px; }
+.icon-orange { stroke:#e67e22; stroke-width:2px; }
+.icon-purple { stroke:#9b59b6; stroke-width:2px; }
+#cursoSelecionado { margin-top:10px; font-weight:600; font-size:16px; color:#fff; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+/* Botão Admin fixo */
+.admin-btn { position:fixed; top:10px; right:10px; background:#3498db; font-size:14px; padding:8px 12px; border-radius:8px; z-index:1000; }
+.admin-btn:hover { background:#2c80b3; }
 
+/* Modal Admin */
+#adminModal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center; }
+#adminContent { background:#fff; padding:20px; width:400px; border-radius:16px; max-height:90%; overflow-y:auto; }
+#adminContent h2{ margin-top:0; }
+#adminContent label{ display:block; margin-top:10px; }
+#adminContent input{ width:100%; }
+#listaCursosAdmin li { margin-bottom:6px; }
+#listaCursosAdmin button { background:#e74c3c; font-size:12px; padding:4px 8px; margin-left:6px; }
 
-  <title>Energiza! Solar e eólica</title>
-  <!--CSS Bootstrap-->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-  <!--CSs Personalizado-->
-  <link rel="stylesheet" type="text/css" href="css/estilo.css" />
-  <link rel="stylesheet" type="text/css" href="css/arquivodoido.css" />
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  header { padding: 20px 10px; }
+  h1 { font-size: 22px; }
+  h2 { font-size: 14px; }
+  .container { padding: 10px; margin: 10px auto; }
+  .card { padding: 15px; }
+  button { font-size: 14px; padding: 10px 14px; }
+  .course-btn { font-size: 14px; padding: 10px; }
+  input, select, textarea { font-size: 14px; padding: 10px; }
+  #adminContent { width: 90%; max-width: 350px; }
+}
 
-  <!--Fonte para icones- Biblioteca-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
-    integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous" />
+@media (max-width: 480px) {
+  h1 { font-size: 20px; }
+  h2 { font-size: 12px; }
+  button { width: 100%; font-size: 14px; padding: 10px; }
+  .course-btn { font-size: 13px; }
+  input, select, textarea { font-size: 13px; }
+  #cursoSelecionado { flex-direction: column; align-items: flex-start; font-size: 14px; }
+}
+</style>
 </head>
+<body>
 
-<body onload="loadCitiesAndStates()"><!--Aqui tem o onload para carregar dados da api-->
+<button class="admin-btn" onclick="abrirLoginAdmin()">Administrador</button>
 
-  <!--Topo-->
-  <div class="container-fluid bg-topo">
-    <!--Classe bg-topo é particular e está no estilo.css-->
-    <header class="container">
-      <!--Menu de navegação-->
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <a href="index.html" class="navbar-brand" target="_blank">
-          <img src="img/logo.png" height="140" class="d-inline-block align-top" />
-        </a>
-        <!--btn para caso mobile-->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" area-controls="menu"
-          aria-expanded="false" aria-label="Menu Colapso">
-          <!--Icone para Menu no caso mobile-->
-          <span class="navbar-toggler-icon text-light"></span>
-        </button>
-        <!--Área de conteúdo-->
-        <div id="menu" class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto text-light">
-            <li class="nav-item">
-              <a href="#home" class="nav-link text-light font-weight-bold scroll-page">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="#somos" class="nav-link text-light font-weight-bold scroll-page">Quem somos</a>
-            </li>
-            <li class="nav-item">
-              <a href="#servicos" class="nav-link text-light font-weight-bold scroll-page">Serviços</a>
-            </li>
-            <li class="nav-item">
-              <a href="formulario.html" class="nav-link text-light font-weight-bold scroll-page">Contato</a>
-            </li>
-          </ul>
-          <!--Botao de orçamento-->
-          <!--<a href="#" class="btn col-md-3 btn-orcamento">Pedir Orçamento</a>-->
-          <!--<button id="open-modal-btn" class="btn col-md-3 btn-orcamento" data-target="#modal">Pedir Orçamento</button>-->
-          <button class="btn col-md-3 btn-orcamento"><a href="formulario.html" style="color: white;">Pedir
-              Orçamento</a></button>
-
-
-        </div>
+<!-- Página 1 -->
+<div id="pagina1">
+<header>
+<h1>Sistema de Matrícula - ONG Moradia e Cidadania</h1>
+<h2>Bem-vindo ao nosso sistema de matrícula online</h2>
+</header>
+<div class="container">
+  <div class="card" id="listaCursos">
+    <h3><i data-lucide="book-open" class="icon-red"></i> Selecione o curso desejado</h3>
   </div>
-
+  <div class="card">
+    <h3><i data-lucide="users" class="icon-green"></i> Sobre Nossa ONG</h3>
+    <p>A ONG Moradia e Cidadania atua há mais de 15 anos promovendo inclusão social e capacitação profissional para comunidades de baixa renda. Nossos cursos gratuitos visam proporcionar mais oportunidades e melhor qualidade de vida.</p>
   </div>
+</div>
+</div>
+
+<!-- Página 2 -->
+<div id="pagina2" class="hidden">
+<header>
+<h1><i data-lucide="clipboard-list" class="icon-purple"></i> Formulário de Matrícula</h1>
+<div id="cursoSelecionado"></div>
+</header>
+<div class="container">
+<div class="card">
+<form id="formMatricula">
+  <div><label for="nome"><i data-lucide="user" class="icon-red"></i> Nome completo</label>
+      <input type="text" id="nome" required><span class="hidden" id="nomeError">Campo obrigatório</span></div>
+  <div><label for="cpf"><i data-lucide="id-card" class="icon-orange"></i> CPF</label>
+      <input type="text" id="cpf" placeholder="000.000.000-00" required maxlength="14"><span class="hidden" id="cpfError">Campo obrigatório</span></div>
+  <div><label for="nascimento"><i data-lucide="calendar" class="icon-blue"></i> Data de nascimento</label>
+      <input type="date" id="nascimento" required><span class="hidden" id="nascimentoError">Campo obrigatório</span></div>
+  <div><label for="sexo"><i data-lucide="user-check" class="icon-green"></i> Sexo</label>
+      <select id="sexo" required><option value="">Selecione...</option><option value="Masculino">Masculino</option><option value="Feminino">Feminino</option><option value="Outro">Outro</option></select><span class="hidden" id="sexoError">Campo obrigatório</span></div>
+  <div><label for="orientacao"><i data-lucide="heart" class="icon-purple"></i> Orientação Sexual</label>
+      <input type="text" id="orientacao" required><span class="hidden" id="orientacaoError">Campo obrigatório</span></div>
+  <div><label for="email"><i data-lucide="mail" class="icon-purple"></i> E-mail</label>
+      <input type="email" id="email" required><span class="hidden" id="emailError">Campo obrigatório</span></div>
+  <div><label for="telefone"><i data-lucide="phone" class="icon-green"></i> Telefone</label>
+      <input type="tel" id="telefone" placeholder="(00) 00000-0000" required><span class="hidden" id="telefoneError">Campo obrigatório</span></div>
+  <div><label for="cep"><i data-lucide="map-pin" class="icon-red"></i> CEP</label>
+      <input type="text" id="cep" placeholder="00000-000" onblur="buscarCEP()" required><span class="hidden" id="cepError">Campo obrigatório</span></div>
+  <div><label for="endereco"><i data-lucide="home" class="icon-blue"></i> Endereço</label>
+      <input type="text" id="endereco" placeholder="Rua, bairro, cidade" readonly required><span class="hidden" id="enderecoError">Campo obrigatório</span></div>
+  <div><label for="numero"><i data-lucide="hash" class="icon-orange"></i> Número</label>
+      <input type="text" id="numero" placeholder="Número da casa/apto" required><span class="hidden" id="numeroError">Campo obrigatório</span></div>
+  <div><label for="curso"><i data-lucide="book" class="icon-green"></i> Curso desejado</label>
+      <input type="text" id="curso" readonly required><span class="hidden" id="cursoError">Campo obrigatório</span></div>
+  <div><label for="periodo"><i data-lucide="clock" class="icon-orange"></i> Período do curso</label>
+      <input type="text" id="periodo" readonly required></div>
+  <div><label for="origem"><i data-lucide="message-circle" class="icon-purple"></i> Como você ficou sabendo do curso?</label>
+      <input type="text" id="origem" required><span class="hidden" id="origemError">Campo obrigatório</span></div>
+  <button type="submit"><i data-lucide="send" class="icon-orange"></i> Enviar Matrícula</button>
+</form>
+</div>
+</div>
+</div>
+
+<!-- Modal Admin -->
+<div id="adminModal">
+  <div id="adminContent">
+    <h2>Painel Administrativo</h2>
+    <h3>Login do Administrador</h3>
+    <label>Login atual: <span id="adminLoginDisplay">admin</span></label>
+    <label>Senha atual: <span id="adminSenhaDisplay">admin</span></label>
+    <input type="text" id="adminLoginInput" placeholder="Novo login">
+    <input type="text" id="adminSenhaInput" placeholder="Nova senha">
+    <button onclick="atualizarLoginSenha()">Atualizar Login/Senha</button>
+    <hr>
+    <h3>Cursos</h3>
+    <ul id="listaCursosAdmin"></ul>
+    <input type="text" id="novoCursoNome" placeholder="Nome do curso">
+    <input type="text" id="novoCursoPeriodo" placeholder="Período do curso">
+    <select id="novoCursoTipo">
+      <option value="ingles">Inglês</option>
+      <option value="espanhol">Espanhol</option>
+      <option value="informatica">Informática</option>
+    </select>
+    <button onclick="adicionarCurso()">Adicionar Curso</button>
+    <hr>
+    <button onclick="fecharAdmin()">Fechar Painel</button>
   </div>
-  </div>
-  </nav>
-  </header>
-  </div>
-  <!--Fim estilização TOPO-->
-  <!--Inicio SlideShow-->
-  <div class="container-fluid my-2">
-    <div id="slideshow" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#slideshow" data-slide-to="0" class="active"></li>
-        <li data-target="#slideshow" data-slide-to="1"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <a href="#">
-            <img src="img/bannerPainelSolar.png" class="d-block w-100" alt="Foto painel Solar" />
-          </a>
-        </div>
-        <div class="carousel-item">
-          <a href="#">
-            <img src="img/banner123.png" class="d-block w-100" alt="Foto energia eólica" />
-          </a>
-        </div>
-        <div class="carousel-item">
-          <a href="#">
-            <img src="img/1234Mulher.png" class="d-block w-100" alt="Foto energia eólica" />
-          </a>
-        </div>
-      </div>
-      <!--Botoes voltar/next no banner-->
-      <a href="#slideshow" class="carousel-control-prev" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-      <a href="#slideshow" class="carousel-control-next" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Próximo</span>
-      </a>
-    </div>
-  </div>
+</div>
 
-  <!--Fim SlideShow-->
-  <!--Inicio Serviços-->
-  <div id="servicos" class="servicos-container">
-    <div class="container bg-servicos rounded shadow-lg" style="max-width: 85%; padding: 0 30px;">
-      <div class="row py-4 d-flex justify-content-center align-items-center flex-wrap">
-        <header class="col-md-12">
-          <h2 class="text-center text-light">
-            O que fazemos?
-            <span class="underline"></span>
-          </h2>
-        </header>
-        <div class="col-md-6 py-4">
-          <img src="img/painelCeu.png" class="img-fluid d-block mx-auto" />
-          <p class="text-center text-light mt-2">Sistemas Eólicos</p>
-          <p class="text-center text-light mt-2">Com energia solar, você pode reduzir sua conta em até 95% e esquecer de
-            vez os temíveis aumentos de tarifa de energia.</p>
-        </div>
-        <div class="col-md-6 py-4">
-          <img src="img/painelEquipe.png" class="img-fluid d-block mx-auto" />
-          <p class="text-center text-light mt-2">Sistemas Energia Solar</p>
-          <p class="text-center text-light mt-2">Temos a solução ideal para sua casa,
-            empresa ou propriedade rural.A energia solar é 100% limpa, contribuindo para o sustetabilidade do
-            planta e reduzindo as emissões de CO2.</p>
-        </div>
-        <div class="col-md-6 py-4">
-          <img src="img/painelWorkers.png" class="img-fluid d-block mx-auto" />
-          <p class="text-center text-light mt-2">Equipes de suporte</p>
-          <p class="text-center text-light mt-2">Temos a melhor equipe de suporte para atender tanto a sua empresa como
-            residência.Com os melhores profissionais 24hs por dia 7 dias por semana</p>
-          </p>
-        </div>
-        <div class="col-md-6 py-4">
-          <img src="img/sistemafotolaico.png" class="img-fluid d-block mx-auto" />
-          <p class="text-center text-light mt-2">Sistema Fotolaico</p>
-          <p class="text-center text-light mt-2">É um investimento com retorno garantido e com rendimento muito superior
-            a qualquer outro investimento convencional.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<script>
+// Admin
+let adminLogin = "admin";
+let adminSenha = "admin";
 
-  <!--Fim Serviços-->
-  <!--Inicio  Parceiros-->
-  <div id="parceiros" class="container-fluid py-4 bg-parceiros">
-    <div class="py-2">
-      <div class="container">
-        <header class="col-md-12">
-          <h2 class="text-center">
-            Conheça nossos parceiros
-            <span class="underline"></span>
-          </h2>
-        </header>
-        <div class="row py-4 text-center">
-          <div class="col-md-2 padding-parceiros">
-            <div class="card sombra">
-              <div class="card-body">
-                <a href="#">
-                  <img src="https://vetorsol.com.br/assets/partners/7.jpg" class="img-fluid mx-auto d-block" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 padding-parceiros">
-            <div class="card sombra">
-              <div class="card-body">
-                <a href="#">
-                  <img src="https://vetorsol.com.br/assets/partners/6.jpg" class="img-fluid mx-auto d-block" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 padding-parceiros">
-            <div class="card sombra">
-              <div class="card-body">
-                <a href="#">
-                  <img src="https://vetorsol.com.br/assets/partners/1.jpg" class="img-fluid mx-auto d-block" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 padding-parceiros">
-            <div class="card sombra">
-              <div class="card-body">
-                <a href="#">
-                  <img src="https://vetorsol.com.br/assets/partners/2.jpg" class="img-fluid mx-auto d-block" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 padding-parceiros">
-            <div class="card sombra">
-              <div class="card-body">
-                <a href="#">
-                  <img src="https://vetorsol.com.br/assets/partners/3.jpg" class="img-fluid mx-auto d-block" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 padding-parceiros">
-            <div class="card sombra">
-              <div class="card-body">
-                <a href="#">
-                  <img src="https://vetorsol.com.br/assets/partners/5.jpg" class="img-fluid mx-auto d-block" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+let cursos = [
+  {nome:"Inglês", periodo:"Manhã", tipo:"ingles", bandeira:"https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"},
+  {nome:"Espanhol", periodo:"Tarde", tipo:"espanhol", bandeira:"https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg"},
+  {nome:"Informática", periodo:"Noite", tipo:"informatica", bandeira:"monitor"}
+];
 
-  <!--Fim  Parceiros-->
-  <!--Inicio Seção 1Paralax-->
-  <div id="somos" class="container-fluid bg-parallax">
-    <div class="py-4">
-      <section class="container">
-        <header class="col-md-12">
-          <h2 class="text-center text-light">
-            Quem somos?
-            <span class="underline"></span>
-          </h2>
-          <p class="text-center text-light">
-            A Energiza! trabalha para garantir a susstentabilidade junto a elaboração dos planos de crescimento de sua
-            empresa.Soluções Sustentáveis, uma empresa genuinamente piauiense, nasceu com a ideia de trazer
-            competitividade ao mercado de energia fotovoltaica no Brasil, buscando sempre alinhar os melhores produtos e
-            um serviço de excelência para entregar o nosso melhor.
+// Funções Página inicial
+function gerarCursos() {
+  const div = document.getElementById("listaCursos");
+  div.innerHTML = '<h3><i data-lucide="book-open" class="icon-red"></i> Selecione o curso desejado</h3>';
+  cursos.forEach((c,idx)=>{
+    let btn = document.createElement("button");
+    btn.className="course-btn";
+    btn.style.gap="10px";
+    btn.innerHTML= c.tipo=="informatica" ? '<i data-lucide="monitor" class="icon-blue"></i> '+c.nome : '<img src="'+c.bandeira+'" width="24"> '+c.nome;
+    btn.onclick=()=>{ selecionarCurso(c); };
+    div.appendChild(btn);
+  });
+  lucide.createIcons();
+}
 
+// Selecionar curso
+function selecionarCurso(curso){
+  document.getElementById("cursoSelecionado").innerHTML = 'Curso selecionado: '+(curso.tipo=="informatica"?'<i data-lucide="monitor" class="icon-blue"></i>':'<img src="'+curso.bandeira+'" width="24">')+' '+curso.nome+' ('+curso.periodo+')';
+  document.getElementById("curso").value = curso.nome;
+  document.getElementById("periodo").value = curso.periodo;
+  mostrarPagina2();
+  lucide.createIcons();
+}
 
-          </p>
-          <p class="text-center text-light">
-            Somos uma empresa global, referência em investimentos em energia limpa nas Américas. Nos tornamos a maior
-            empresa brasileira de geração a partir de fontes renováveis e hoje produzimos energia capaz de abastecer 3
-            milhões e 800 mil lares.
+function mostrarPagina2(){
+  document.getElementById("pagina1").classList.add("hidden");
+  document.getElementById("pagina2").classList.remove("hidden");
+}
 
-            Nossa missão é empoderar empresas e pessoas por meio da energia limpa, barata e simples, garantindo redução
-            de custos e contribuindo para uma economia de baixo carbono. Não descansaremos até que a energia renovável
-            seja uma realidade para todos.
+// Formatar CPF
+const cpfInput = document.getElementById("cpf");
+cpfInput.addEventListener("input", function() {
+  let value = cpfInput.value.replace(/\D/g, "");
+  if (value.length > 11) value = value.slice(0,11);
+  value = value.replace(/(\d{3})(\d)/, "$1.$2");
+  value = value.replace(/(\d{3})(\d)/, "$1.$2");
+  value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  cpfInput.value = value;
+});
 
-          </p>
+// CEP
+async function buscarCEP(){
+  const cep = document.getElementById("cep").value.replace(/\D/g,"");
+  if(cep.length===8){
+    try{
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await response.json();
+      if(data.erro){ alert("CEP não encontrado!"); document.getElementById("endereco").value=""; return; }
+      document.getElementById("endereco").value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+    }catch(e){ alert("Erro ao buscar CEP."); }
+  }
+}
 
-        </header>
-        <div class="row py-2">
-          <div class="col-sm-6 ccol-md-3 col-lg-3">
-            <div class="fatos">
-              <div class="icon">
-                <i class="fa fa-clock"></i>
-              </div>
-              <div class="fatos-contador">
-                <h3>+<span class="contar">43678</span></h3>
-                <h4>Usuários conectados</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 ccol-md-3 col-lg-3">
-            <div class="fatos">
-              <div class="icon">
-                <i class="fa fa-book"></i>
-              </div>
-              <div class="fatos-contador">
-                <h3><span class="contar">160</span></h3>
-                <h4>Instalações mensais</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 ccol-md-3 col-lg-3">
-            <div class="fatos">
-              <div class="icon">
-                <i class="fa fa-users"></i>
-              </div>
-              <div class="fatos-contador">
-                <h3>+<span class="contar">2897</span></h3>
-                <h4>Cidades do nordeste</h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 ccol-md-3 col-lg-3">
-            <div class="fatos">
-              <div class="icon">
-                <i class="fa fa-star"></i>
-              </div>
-              <div class="fatos-contador">
-                <h3><span class="contar">4.8</span></h3>
-                <h4>Avaliação dos clientes</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+// Formulário
+document.getElementById("formMatricula").addEventListener("submit", async function(e){
+  e.preventDefault();
 
-  <!--Fim Seção 1Paralax-->
-  <!--Inicio Produtos especificos-->
-  <div class="container-fluid">
-    <div class="my-2 py4">
-      <section class="container">
-        <header class="col-md-12">
-          <h2 class="text-center">
-            Assinatura em promoção
-            <span class="underline"></span>
-          </h2>
-        </header>
-        <!--Colunamento da seção-->
-        <div class="row">
-          <div class="col-sm-6 col-md-3 col-xs-12">
-            <div class="tabela-preco sombra">
-              <div class="preco-detalhe">
-                <h2>Locação de Usina Solar </h2>
-                <strike>R$8.854,23</strike>
-                <span>R$5.200,00</span>
-                <ul>
-                  <li>Locação de uma Usina Solar você economiza até 20%</li>
-                  <li>Processo de construção</li>
-                  <li>Operação da usina solar</li>
-                  <li>Mensalidade</li>
-                </ul>
-              </div>
-              <div class="preco-botao">
-                <a href="formulario.html" class="btn btn-preco">Assinar</a>
-              </div>
-              <small>* Garantia de Satisfação de 90 dias</small>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3 col-xs-12">
-            <div class="tabela-preco sombra">
-              <div class="preco-detalhe">
-                <h2>Sistema de energia Eólica</h2>
-                <strike>R$18.854,23</strike>
-                <span>R$8.500,00</span>
-                <ul>
-                  <li>Locação de uma Usina Eólica você economiza até 40%</li>
-                  <li>Instalação de equipamentos</li>
-                  <li>Gerenciamento de central eólica</li>
-                  <li>Manutenção</li>
-                </ul>
-              </div>
-              <div class="preco-botao">
-                <a href="formulario.html" class="btn btn-preco">Assinar</a>
-              </div>
-              <small>* Garantia de Satisfação de 90 dias</small>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3 col-xs-12">
-            <div class="tabela-preco sombra">
-              <div class="preco-detalhe">
-                <h2>Energia Solar residencial</h2>
-                <strike>R$5.854,23</strike>
-                <span>R$3.200,00</span>
-                <ul>
-                  <li>Economia de até 80%</li>
-                  <li>Projeto eletrico para residência</li>
-                  <li>Suporte</li>
-                  <li>Equipamentos trocados a cada 2 anos</li>
-                </ul>
-              </div>
-              <div class="preco-botao">
-                <a href="formulario.html" class="btn btn-preco">Assinar</a>
-              </div>
-              <small>* Garantia de Satisfação de 90 dias</small>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3 col-xs-12">
-            <div class="tabela-preco sombra">
-              <div class="preco-detalhe">
-                <h2>Sistemas Hibridos</h2>
-                <strike>R$40.900,23</strike>
-                <span>R$9.900,00</span>
-                <ul>
-                  <li>Locação de uma Usina Eólica você economiza até 98%</li>
-                  <li>Instalação de equipamentos</li>
-                  <li>Gerenciamento de central eólica</li>
-                  <li>Suporte especializado</li>
-                </ul>
-              </div>
-              <div class="preco-botao">
-                <a href="formulario.html" class="btn btn-preco">Assinar</a>
-              </div>
-              <small>* Garantia de Satisfação de 90 dias</small>
-            </div>
-          </div>
+  // ❗ SUBSTITUA ESTA VARIÁVEL PELO URL DO SEU GOOGLE APPS SCRIPT PUBLICADO!
+  const WEB_APP_URL = https://script.google.com/macros/s/AKfycbwL7dDHYLLwA9NxWzq6PlXKHQXNEYjQrnAoID5LqO9qWRcKu_1usW6TS_A1gDRH3u6F/exec; 
+  // ❗ EXEMPLO: const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7A_j5D.../exec";
 
+  let campos = ["nome","cpf","nascimento","sexo","orientacao","email","telefone","cep","endereco","numero","curso","periodo","origem"];
+  let valido=true;
+  let dadosFormulario = {};
 
-        </div><!--Fecha a div row que coloca os itens em uma mesma linha-->
-      </section>
-    </div>
-  </div>
-  <!--Fim Produtos especificos-->
-  <!--Rodapé-->
-  <footer class="container-fluid bg-rodape1">
-    <div class="row">
-      <div class="col-md-4">
-        <h5 class="text-light align-middle mais-info"><i class="fas fa-info-circle fa-2x mr-2 text-light">Informações úteis</i>
-          </h5>
-        <ul class="text-light">
-          <li><a href="https://www.linkedin.com/in/energiza/" class="text-light" target="_blank"><i
-                class="fa fa-angle-right"></i></i>Trabalhe conosco</a></li>
-          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Telefones úteis</a></li>
-          <li><a href="#" class="text-light"><i class="fa fa-angle-right"></i>Administrativo</a></li><br />
-          <li><a href="#" class="text-light tituloSuporte">
-              <h4 style="margin-left: 18px;">Suporte técnico</h4>
-            </a></li>
+  // 1. Validação e coleta dos dados
+  campos.forEach(campo => {
+    let input = document.getElementById(campo);
+    let error = document.getElementById(campo + "Error");
+    
+    // O campo 'periodo' é readonly e não precisa de validação de erro
+    if (campo !== "periodo" && (!input || !input.value.trim())) { 
+        if (error) error.classList.remove("hidden"); 
+        valido = false; 
+    } else if (error) { 
+        error.classList.add("hidden"); 
+    }
+    
+    // Coleta o valor para envio
+    if(input) {
+      dadosFormulario[campo] = input.value.trim();
+    }
+  });
 
-          <div style="display: inline-block; margin-right: 10px; ">
-            <button onclick="openForm()"
-              style="padding:5px; background-color: #FE8F4C; border-radius: 5px; box-shadow: 2px 2px 2px rgba(0,0,0,0.3);">
-              Atendimento
-            </button>
+  if(valido){
+    try {
+      // 2. Envio dos dados para o Google Apps Script
+      const response = await fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'cors', // Necessário para Web Apps
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosFormulario)
+      });
 
-          </div>
+      const resultado = await response.json();
 
+      // 3. Feedback ao usuário
+      if (resultado.status === "sucesso") {
+        alert("Obrigado por fazer sua matrícula! Em breve entraremos em contato. 🎉");
+        document.getElementById("formMatricula").reset();
+        document.getElementById("pagina2").classList.add("hidden");
+        document.getElementById("pagina1").classList.remove("hidden");
+        document.getElementById("cursoSelecionado").innerHTML='';
+      } else {
+        alert("Ops! Ocorreu um erro ao enviar sua matrícula: " + resultado.mensagem);
+        console.error("Erro do Apps Script:", resultado.mensagem);
+      }
+    } catch (error) {
+      alert("Houve uma falha na comunicação com o servidor. Tente novamente.");
+      console.error("Erro de Rede/Fetch:", error);
+    }
+  }
+});
 
-        </ul>
-      </div>
-      <!--Div oculta form btn suporte-->
-      <div class="form-popup" id="myForm">
+// Admin
+function abrirLoginAdmin(){
+  let login = prompt("Login:");
+  let senha = prompt("Senha:");
+  if(login===adminLogin && senha===adminSenha){
+    document.getElementById("adminModal").style.display="flex";
+    atualizarListaCursosAdmin();
+  } else alert("Login ou senha incorretos!");
+}
+function fecharAdmin(){ document.getElementById("adminModal").style.display="none"; }
+function atualizarLoginSenha(){
+  let l=document.getElementById("adminLoginInput").value.trim();
+  let s=document.getElementById("adminSenhaInput").value.trim();
+  if(l) adminLogin=l;
+  if(s) adminSenha=s;
+  document.getElementById("adminLoginDisplay").innerText=adminLogin;
+  document.getElementById("adminSenhaDisplay").innerText=adminSenha;
+  alert("Login e senha atualizados!");
+  document.getElementById("adminLoginInput").value="";
+  document.getElementById("adminSenhaInput").value="";
+}
+function atualizarListaCursosAdmin(){
+  const ul=document.getElementById("listaCursosAdmin");
+  ul.innerHTML="";
+  cursos.forEach((c,idx)=>{
+    const li=document.createElement("li");
+    li.innerHTML=c.nome+" ("+c.periodo+") <button onclick='removerCurso("+idx+")'>X</button>";
+    ul.appendChild(li);
+  });
+}
+function adicionarCurso(){
+  const nome=document.getElementById("novoCursoNome").value.trim();
+  const periodo=document.getElementById("novoCursoPeriodo").value.trim();
+  const tipo=document.getElementById("novoCursoTipo").value;
+  if(nome && periodo){
+    let bandeira="";
+    if(tipo=="ingles") bandeira="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg";
+    else if(tipo=="espanhol") bandeira="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg";
+    else if(tipo=="informatica") bandeira="monitor";
+    cursos.push({nome, periodo, tipo, bandeira});
+    atualizarListaCursosAdmin();
+    gerarCursos();
+    document.getElementById("novoCursoNome").value="";
+    document.getElementById("novoCursoPeriodo").value="";
+  } else alert("Preencha todos os campos do curso!");
+}
+function removerCurso(idx){
+  cursos.splice(idx,1);
+  atualizarListaCursosAdmin();
+  gerarCursos();
+}
 
-        <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="post"
-          class="form-container">
-          <h2>Solicitar suporte via e-mail</h2>
+gerarCursos();
+lucide.createIcons();
+</script>
 
-          <input type=hidden name="orgid" value="00DDo000001DPsW">
-          <input type=hidden name="retURL" value="https://energiza.netlify.app/agradecimento2.html">
-
-          <label for="name"><b>Nome</b></label>
-          <input id="name" maxlength="80" name="name" size="20" type="text" /><br>
-
-          <label for="email"><b>E-mail</b></label>
-          <input id="email" maxlength="80" name="email" size="20" type="text" type="text" name="email" required />
-
-          <label for="company"><b>Empresa</b></label>
-          <input id="company" maxlength="80" name="company" size="20" type="text" /><br>
-
-          <label for="phone"><b>Telefone</b></label>
-          <input id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
-
-          <label for="subject"><b>Assunto</b></label>
-          <input id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
-
-
-
-          <input type="hidden" name="to" value="energizaatendimentoSolar@gmail.com">
-
-          <button type="submit" name="submit" class="btn">Enviar</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Fechar</button>
-        </form>
-
-        <!--Fim da Div oculta form btn suporte-->
-        <!--<form action="enviar-email.php" method="post" class="form-container">
-
-          <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" required>
-          <br>
-          <label for="company">Empresa:</label>
-          <input type="text" id="com" name="com" required>
-          <br>
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required>
-          <br>
-          <label for="message">Mensagem:</label>
-          <textarea id="message" name="message" required placeholder="Digite sua mensagem"></textarea>
-          <br>
-          <button type="submit" class="btn">Enviar</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Fechar</button>
-        </form>-->
-      </div>
-
-
-
-
-      <div class="col-md-4">
-        <div class="col-md-6">
-          <h6 class="text-light mais-empresa">Mais sobre a empresa<span class="underline-footer" </h6>
-              <ul class="text-light">
-                <li><a href="#somos" class="text-light">Quem Somos</a></li>
-                <li><a href="#parceiros" class="text-light">Parceiros</a></li>
-                <li><a href="#servicos" class="text-light">Portifolio</a></li>
-                <li><a href="formulario.html" class="text-light">Contato</a></li>
-
-              </ul>
-        </div>
-        <div class="col-md-6">
-
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-light mb3 bg-card-rodape">
-          <div class="card-body">
-            <h4 class="card-title"><i class="far fa-building mr2 fa-2x icon-banner-rodape"></i>
-              Traga sua empresa</h4>
-            <p class="card-text text-justify">Peça um orçamento sem compromisso e veja como podemos ajudar na economia
-              de energia</p>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </footer>
-  <div class="container-fluid bg-rodape2">
-    <div class="continer py-4">
-      <img src="img/logoRodape.png" class="img-fluid mx-auto d-block">
-      <div class="text-center pt-1">
-        <a href="#" class="icon-social" target="_blank"><i class="fab fa-facebook-square fa-lg"></i></a>
-        <a href="#" class="icon-social" target="_blank"><i class="fab fa-youtube-square fa-lg"></i></a>
-        <a href="#" class="icon-social" target="_blank"><i class="fab fa-instagram-square fa-lg"></i></a>
-        <a href="#" class="icon-social" target="_blank"><i class="fab fa-twitter-square fa-lg"></i></a>
-        <a href="#" class="icon-social" target="_blank"><i class="fab fa-linkedin-square fa-lg"></i></a>
-      </div></img>
-    </div>
-
-  </div>
-  <!--Fim do Rodapé-->
-
-  <!--JS Bootstrap-->
-  <script type="text/javascript" src="js/jquery-min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
-  <script type="text/javascript" src="js/waypoints.min.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
 </body>
-
 </html>
