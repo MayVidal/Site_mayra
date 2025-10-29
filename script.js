@@ -1,5 +1,5 @@
 // ❗ SUBSTITUA ESTE URL PELO SEU GOOGLE APPS SCRIPT PUBLICADO (Web App URL)!
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwL7dDHYLLwA9NxWzq6PlXKHQXNEYjQrnAoID5LqO9qWRcKu_1usW6TS_A1gDRH3u6F/exec"; 
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxv-eC0PpmeE8gdAwYCVBVsV94IXOIovKBWMypaR0-hYDKjhX0abR4tWmkcEKZHOQzS1w/exec"; 
 
 // Admin
 let adminLogin = "admin";
